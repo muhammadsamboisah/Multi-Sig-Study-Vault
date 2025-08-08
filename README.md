@@ -29,9 +29,14 @@ A SvelteKit + Stacks.js dApp enabling study groups to form GRAFT-powered multi-s
    - Populate Stacks network, wallet config, Firebase credentials (placeholders for now)
 
 ## Running Tests
-- Contracts: via Clarinet test (to be wired)
+- Contracts (Deno-based Clarinet tests):
+   1. Install Deno (winget install -e --id DenoLand.Deno)
+   2. Run from contracts/: `deno test -A tests`
 - Web: via Playwright/Vitest (to be added)
 - Services: via your preferred test runner (to be added)
+
+## CI
+- GitHub Actions workflow runs Deno-based Clarinet tests on pull requests.
 
 ## Documentation
 For detailed product specifications, refer to `PRD.md` at the repository root.

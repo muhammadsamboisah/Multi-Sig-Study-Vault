@@ -1,0 +1,25 @@
+name: contracts-tests
+
+on:
+  push:
+    branches: [ "feat/clarity-finishing-line-consensus-and-dao-forfeit", "master", "main" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Run Clarinet Deno tests
+        run: deno test -A tests
