@@ -109,7 +109,7 @@
         (sender tx-sender)
        )
     (begin
-      (asserts! (<= block-height (get deadline g)) (err u400))
+  (asserts! (<= (block-height) (get deadline g)) (err u400))
       (match (map-get? deposits { id: id, member: sender })
         existing (let ((new-amt (+ (get amount existing) amount)))
                    (map-set deposits { id: id, member: sender } { amount: new-amt, claimed: (get claimed existing) })
@@ -129,7 +129,7 @@
         (g (unwrap! (map-get? groups { id: id }) (err u404)))
        )
     (begin
-      (asserts! (<= block-height (get deadline g)) (err u400))
+  (asserts! (<= (block-height) (get deadline g)) (err u400))
       (match (map-get? votes { id: id, member: tx-sender })
         existing (ok true) ;; already signaled; idempotent
         none (begin
@@ -171,7 +171,7 @@
         (d (unwrap! (map-get? deposits { id: id, member: tx-sender }) (err u404)))
        )
     (begin
-      (asserts! (> block-height (get deadline g)) (err u400))
+  (asserts! (> (block-height) (get deadline g)) (err u400))
       (asserts! (is-eq (get claimed d) false) (err u409))
       (map-set deposits { id: id, member: tx-sender } { amount: (get amount d), claimed: true })
   (ok true)
